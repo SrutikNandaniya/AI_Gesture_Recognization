@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Gesture Recognition - Professional Interface</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header Section -->
+        <header class="app-header">
+            <div class="header-content">
+                <div class="logo-section">
+                    <div class="logo-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h1 class="logo-text">AI Gesture Recognition</h1>
+                </div>
+                <div class="header-actions">
+                    
+                    <button class="dark-mode-toggle" id="darkModeToggle" title="Toggle dark mode">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="content-wrapper">
+                <!-- Left Panel - Information -->
+                <section class="info-panel">
+                    <div class="panel-header">
+                        <h2 class="panel-title">
+                            <i class="fas fa-info-circle"></i>
+                            About the System
+                        </h2>
+                    </div>
+                    
+                    <div class="panel-content">
+                        <p class="description">
+                            Experience cutting-edge AI-powered gesture recognition technology. 
+                            Control your digital environment through intuitive hand movements with 
+                            real-time processing and high accuracy detection.
+                        </p>
+                        
+                        <div class="features-grid">
+                            <div class="feature-card">
+                                <div class="feature-icon">
+                                    <i class="fas fa-bolt"></i>
+                                </div>
+                                <div class="feature-content">
+                                    <h3>Real-time Processing</h3>
+                                    <p>Instant gesture recognition with minimal latency</p>
+                                </div>
+                            </div>
+                            
+                            <div class="feature-card">
+                                <div class="feature-icon">
+                                    <i class="fas fa-hand-paper"></i>
+                                </div>
+                                <div class="feature-content">
+                                    <h3>Multiple Gestures</h3>
+                                    <p>Support for various hand gestures and signs</p>
+                                </div>
+                            </div>
+                            
+                            <div class="feature-card">
+                                <div class="feature-icon">
+                                    <i class="fas fa-brain"></i>
+                                </div>
+                                <div class="feature-content">
+                                    <h3>AI-Powered</h3>
+                                    <p>Advanced machine learning algorithms</p>
+                                </div>
+                            </div>
+                            
+                            <div class="feature-card">
+                                <div class="feature-icon">
+                                    <i class="fas fa-mobile-alt"></i>
+                                </div>
+                                <div class="feature-content">
+                                    <h3>Responsive Design</h3>
+                                    <p>Works seamlessly across all devices</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Center Panel - Camera & Controls -->
+                <section class="camera-panel">
+                    <div class="panel-header">
+                        <h2 class="panel-title">
+                            <i class="fas fa-camera"></i>
+                            Gesture Recognition
+                        </h2>
+                    </div>
+                    
+                    <div class="camera-container">
+                        <div class="camera-viewport">
+                            <div class="placeholder-image" id="placeholderImage">
+                                <div class="placeholder-content">
+                                    <div class="placeholder-icon">
+                                        <i class="fas fa-hand-paper"></i>
+                                    </div>
+                                    <h3>Camera Ready</h3>
+                                    <p>Click "Start Recognition" to begin</p>
+                                </div>
+                                <img src="assest/future_of_work_concept_illustration.jpg" alt="AI Gesture Recognition" style="display: none;">
+                            </div>
+                            
+                            <div id="webcam-container" class="webcam-container">
+                                <div class="loading-overlay" id="loadingOverlay">
+                                    <div class="loading-content">
+                                        <div class="spinner"></div>
+                                        <p>Initializing camera...</p>
+                                        <div class="loading-progress">
+                                            <div class="progress-bar"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="control-panel">
+                            <div class="button-group">
+                                <button class="btn btn-primary" onclick="init()">
+                                    <i class="fas fa-play"></i>
+                                    <span>Start Recognition</span>
+                                </button>
+                                <button class="btn btn-stop hidden" id="stopBtn" onclick="stopCamera()">
+                                    <i class="fas fa-stop"></i>
+                                    <span>Stop</span>
+                                </button>
+                                <button class="btn btn-secondary hidden" id="resetBtn" onclick="resetCamera()">
+                                    <i class="fas fa-redo"></i>
+                                    <span>Reset</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Right Panel - Predictions -->
+                <section class="predictions-panel">
+                    <div class="panel-header">
+                        <h2 class="panel-title">
+                            <i class="fas fa-chart-line"></i>
+                            Live Predictions
+                        </h2>
+                    </div>
+                    
+                    <div class="predictions-container">
+                        <div class="prediction-panel hidden" id="predictionPanel">
+                            <div class="predictions-content">
+                                <div id="label-container" class="label-container"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="placeholder-predictions">
+                            <div class="placeholder-prediction-content">
+                                <div class="placeholder-icon">
+                                    <i class="fas fa-chart-bar"></i>
+                                </div>
+                                <h3>Predictions Panel</h3>
+                                <p>Gesture predictions will appear here when recognition is active</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Gestures Information Section -->
+            <section class="gestures-section">
+                <div class="section-header">
+                    <h2 class="section-title">
+                        <i class="fas fa-hand-paper"></i>
+                        Supported Gestures
+                    </h2>
+                    <p class="section-subtitle">The system can recognize the following hand gestures</p>
+                </div>
+                
+                <div class="gestures-grid">
+                    <div class="gesture-card">
+                        <div class="gesture-icon">
+                            <i class="fas fa-hand-peace"></i>
+                        </div>
+                        <h3>Peace Sign</h3>
+                        <p>Two-finger peace gesture</p>
+                    </div>
+                    
+                    <div class="gesture-card">
+                        <div class="gesture-icon">
+                            <i class="fas fa-thumbs-up"></i>
+                        </div>
+                        <h3>Thumbs Up</h3>
+                        <p>Positive approval gesture</p>
+                    </div>
+                    
+                    <div class="gesture-card">
+                        <div class="gesture-icon">
+                            <i class="fas fa-thumbs-down"></i>
+                        </div>
+                        <h3>Thumbs Down</h3>
+                        <p>Negative disapproval gesture</p>
+                    </div>
+                    
+                    <div class="gesture-card">
+                        <div class="gesture-icon">
+                            <i class="fas fa-hand-paper"></i>
+                        </div>
+                        <h3>Open Hand</h3>
+                        <p>Palm facing forward</p>
+                    </div>
+                    
+                    <div class="gesture-card">
+                        <div class="gesture-icon">
+                            <i class="fas fa-smile"></i>
+                        </div>
+                        <h3>Smile Gesture</h3>
+                        <p>Facial expression recognition</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="app-footer">
+            <div class="footer-content">
+                <p>&copy; 2024 AI Gesture Recognition. Powered by TensorFlow.js</p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest/dist/teachablemachine-image.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
